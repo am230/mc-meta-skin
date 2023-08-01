@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { CreateSkinInfoResponse } from "./api/create";
-import SkinResult from "@/components/SkinResult";
 import ProfileCard from "@/components/ProfileCard";
-import { ReadSkinInfoResponse } from "./api/read";
+import { decodeJson } from "@/lib/skin-processor";
 
 const CreatePage = () => {
     const router = useRouter()
     const [skin, setSkin] = useState<string | null>(null)
-    const [info, setInfo] = useState<ReadSkinInfoResponse | null>(null)
+    const [info, setInfo] = useState<{
+        name: string;
+        author: string;
+        content: string;
+    } | null>(null)
 
     useEffect(() => {
         const skinData = router.query.skin_data as string
@@ -19,10 +21,8 @@ const CreatePage = () => {
         }
         const skin = atob(skinData)
         setSkin(skin)
-        axios.post<ReadSkinInfoResponse>('/api/read', {
-            skin
-        }).then(res => {
-            setInfo(res.data)
+        decodeJson(skin).then((info) => {
+            setInfo(info)
         })
     }, [])
 

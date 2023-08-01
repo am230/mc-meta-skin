@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import ProfileCardEditor from "@/components/ProfileCardEditor";
-import SubmitButton from "@/components/SubmitButton";
-import axios from "axios";
-import { CreateSkinInfoResponse } from "./api/create";
 import SkinResult from "@/components/SkinResult";
+import { encodeJson } from "@/lib/skin-processor";
 
 const CreatePage = () => {
     const router = useRouter()
@@ -24,11 +22,12 @@ const CreatePage = () => {
         <main className="flex min-h-screen flex-col items-center justify-center p-24">
             <ProfileCardEditor skin={skin!} callback={async (name, author, content) => {
                 console.log(name, author, content)
-                const res = await axios.post<CreateSkinInfoResponse>('/api/create', {
-                    name, author, content, skin
+                const encodedSkin = await encodeJson(skin!, {
+                    name: name,
+                    author: author,
+                    content: content,
                 })
-                console.log(res.data)
-                setImage(res.data.skin)
+                setImage(encodedSkin)
             }} />
             {image && <SkinResult skin={image} close={() => {
                 setImage(null)
