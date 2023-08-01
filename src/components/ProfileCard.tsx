@@ -15,7 +15,9 @@ const ProfileCard = (props: { skin: string, name: string, author: string, conten
                         作者：<h2>{props.author}</h2>
                     </div>
                 </div>
-                <ReactMarkdown className="markdown-body" children={props.content} />
+                <ReactMarkdown>
+                    {props.content}
+                </ReactMarkdown>
             </div>
         </div>
     </>
