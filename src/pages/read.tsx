@@ -9,7 +9,6 @@ import { ReadSkinInfoResponse } from "./api/read";
 const CreatePage = () => {
     const router = useRouter()
     const [skin, setSkin] = useState<string | null>(null)
-    const [image, setImage] = useState<string | null>(null)
     const [info, setInfo] = useState<ReadSkinInfoResponse | null>(null)
 
     useEffect(() => {

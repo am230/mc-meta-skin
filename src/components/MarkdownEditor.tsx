@@ -8,7 +8,7 @@ const MarkdownEditor = (props: { value: string, setValue: (value: string) => voi
             }} placeholder={`説明文をここに入力（Markdown形式使えるよ）`} />
         </div>
         <div className="w-full overflow-x-hidden flex flex-col">
-            <ReactMarkdown children={props.value} />
+            <ReactMarkdown className="" children={props.value} />
         </div>
     </div >
 }
