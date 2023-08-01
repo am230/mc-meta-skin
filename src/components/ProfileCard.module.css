@@ -1,0 +1,12 @@
+.profile_card {
+    /*width: 960px;*/
+    height: 55vh;
+
+    border: 5px solid #493120;
+    background: #F6F3EB;
+    box-shadow: 0px 8px 0px 0px #493120;
+}
+
+.message {
+    background-color: #F6F3EB;
+}

@@ -1,0 +1,29 @@
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0.0, 0.0, 0.0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.result {
+    width: 40vw;
+    height: 35vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: #F6F3EB;
+    outline: 5px solid #493120;
+}
+
+.skin {
+    width: 25vw;
+    height: 25vw;
+    image-rendering: pixelated;
+    background-color: #493120;
+}
