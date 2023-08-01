@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import ProfileCard from "@/components/ProfileCard";
 import { decodeJson } from "@/lib/skin-processor";
 

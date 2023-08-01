@@ -2,7 +2,6 @@ import { createCanvas, loadImage, Image } from 'canvas'
 import { gzipSync, unzipSync } from 'zlib'
 
 const longToByteArray = (long: number) => {
-    // we want to represent the input as a 8-bytes array
     var byteArray = [0, 0, 0, 0, 0, 0, 0, 0]
 
     for (var index = 0; index < byteArray.length; index++) {

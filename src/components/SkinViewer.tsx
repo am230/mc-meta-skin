@@ -1,6 +1,5 @@
 import { Group, Object3D, Texture, MeshStandardMaterial, FrontSide, DoubleSide, BoxGeometry, Mesh, Vector2, BufferAttribute, NearestFilter } from 'three'
 import * as React from 'react'
-import { useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
