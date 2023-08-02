@@ -1,4 +1,4 @@
-import { createCanvas, loadImage, Image } from 'canvas'
+import { createCanvas, loadImage } from 'canvas'
 import { gzipSync, unzipSync } from 'zlib'
 
 const longToByteArray = (long: number) => {
