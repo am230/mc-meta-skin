@@ -4,6 +4,7 @@ import Create from '../../public/create.svg'
 import Read from '../../public/read.svg'
 import Title from "@/components/Title";
 import { useRouter } from "next/router";
+import Author from "@/components/Author";
 
 export default function Home() {
     const router = useRouter()
@@ -23,6 +24,7 @@ export default function Home() {
                     }} />
                 </div>
             </div>
+            <Author/>
         </main>
     </>
 }
