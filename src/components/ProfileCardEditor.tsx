@@ -4,6 +4,7 @@ import { useState } from 'react';
 import TextInput from './TextInput';
 import MarkdownEditor from './MarkdownEditor';
 import SubmitButton from './SubmitButton';
+import { availablePixels, zip } from '@/lib/skin-processor';
 
 const ProfileCardEditor = (props: { skin: string, callback: (name: string, author: string, content: string) => void }) => {
     const [name, setName] = useState<string>('')
@@ -24,6 +25,13 @@ const ProfileCardEditor = (props: { skin: string, callback: (name: string, autho
         props.callback(name, author, content)
     }
 
+    const dataLeft = availablePixels - zip({
+        name: name,
+        author: author,
+        content: content,
+    }).length
+
+
     return <>
         <div className={`flex flex-col sm:flex-row p-12 overflow-y-scroll items-center w-[80vw] max-w-[960px] ${styles.profile_card}`}>
             <SkinViewer skinPath={props.skin} />
@@ -43,6 +51,9 @@ const ProfileCardEditor = (props: { skin: string, callback: (name: string, autho
                 <MarkdownEditor value={content} setValue={setContent} />
             </div>
         </div>
+        {<div className={`p-4 ${styles.message} ${dataLeft < 0 ? 'text-red-500' : 'text-green-700'}`}>
+            残りデータ量：{dataLeft}
+        </div>}
         <SubmitButton callback={submit}>
             完成
         </SubmitButton>

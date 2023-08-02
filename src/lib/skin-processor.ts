@@ -91,6 +91,8 @@ const maskPixels =
         return b ? [255, 255, 255, 255] : [0, 0, 0, 0]
     }).flat()
 
+export const availablePixels = maskPixels.filter((x, i) => x > 0 && i % 4 != 3).length - 8
+
 async function encode(skinData: string, data: number[]): Promise<string> {
     const canvas = createCanvas(64, 64)
     const ctx = canvas.getContext('2d')
@@ -148,6 +150,19 @@ async function decode(skinData: string): Promise<number[]> {
         index += 1
     }
     return data
+}
+
+export function zip(data: any): number[] {
+    const text = encodeURIComponent(JSON.stringify(data))
+    const compressed = gzipSync(text)
+    const bytes = Array.from(compressed)
+    return bytes
+}
+
+export function unzip(data: number[]): any {
+    const text = unzipSync(Buffer.from(data))
+    const decodedData = JSON.parse(decodeURIComponent(text.toString()))
+    return decodedData
 }
 
 export async function encodeJson(skinData: string, data: any): Promise<string> {
