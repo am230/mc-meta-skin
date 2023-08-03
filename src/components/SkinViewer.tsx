@@ -292,10 +292,10 @@ const Player = (props: { skinPath: string }) => {
     skinObject.setInnerLayerVisible(true)
     skinObject.setOuterLayerVisible(true)
     skinObject.resetJoints()
-    
+
     useFrame((state, delta) => {
         const time = state.clock.getElapsedTime() * 2
-        skinObject.position.y = 1 - Math.min(1, Math.pow(time, 2))
+        skinObject.position.y = Math.max(0, 4 - Math.pow(4, time * 2))
         skinObject.leftArm.rotation.set(toRadians(45 - Math.sin(time) * 2), 0, toRadians(Math.cos(time / 3) * 1.2))
         skinObject.rightArm.rotation.set(toRadians(-45 + Math.cos(time) * 2), 0, toRadians(Math.sin(time / 3) * 1.2))
         skinObject.leftLeg.rotation.set(toRadians(-45 / 2), 0, 0)
