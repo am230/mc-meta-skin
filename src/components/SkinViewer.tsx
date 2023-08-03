@@ -1,6 +1,6 @@
 import { Group, Object3D, Texture, MeshStandardMaterial, FrontSide, DoubleSide, BoxGeometry, Mesh, Vector2, BufferAttribute, NearestFilter } from 'three'
 import * as React from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import styles from './SkinViewer.module.css'
@@ -292,12 +292,15 @@ const Player = (props: { skinPath: string }) => {
     skinObject.setInnerLayerVisible(true)
     skinObject.setOuterLayerVisible(true)
     skinObject.resetJoints()
-
-    skinObject.leftArm.rotation.set(toRadians(45), 0, 0)
-    skinObject.rightArm.rotation.set(toRadians(-45), 0, 0)
-    skinObject.leftLeg.rotation.set(toRadians(-45 / 2), 0, 0)
-    skinObject.rightLeg.rotation.set(toRadians(45 / 2), 0, 0)
-
+    const { time } = { time: 0 }
+    useFrame((state, delta) => {
+        const time = state.clock.getElapsedTime() * 2
+        skinObject.position.y = 1 - Math.min(1, Math.pow(time, 2))
+        skinObject.leftArm.rotation.set(toRadians(45 - Math.sin(time) * 2), 0, toRadians(Math.cos(time / 3) * 1.2))
+        skinObject.rightArm.rotation.set(toRadians(-45 + Math.cos(time) * 2), 0, toRadians(Math.sin(time / 3) * 1.2))
+        skinObject.leftLeg.rotation.set(toRadians(-45 / 2), 0, 0)
+        skinObject.rightLeg.rotation.set(toRadians(45 / 2), 0, 0)
+    })
 
     return (
         <primitive object={skinObject} />
