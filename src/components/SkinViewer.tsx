@@ -292,7 +292,7 @@ const Player = (props: { skinPath: string }) => {
     skinObject.setInnerLayerVisible(true)
     skinObject.setOuterLayerVisible(true)
     skinObject.resetJoints()
-    const { time } = { time: 0 }
+    
     useFrame((state, delta) => {
         const time = state.clock.getElapsedTime() * 2
         skinObject.position.y = 1 - Math.min(1, Math.pow(time, 2))
